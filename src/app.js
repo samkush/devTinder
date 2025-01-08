@@ -1,40 +1,31 @@
 const express = require('express');
 const app = express();
 
+const { adminAuth, userAuth } = require('./middlewares/auth');
+
 // this will only match the get request
 // app.use("/route", rH, [rH2,rH3], rH4, rh5)
+// GET/users => middleware chain => request handlers 
+app.use('/admin', adminAuth);
 
-app.use('/user', 
-    
-(req, res, next) => {
-    // route handler 
-    console.log('handling user route 1');
-    // res.send('route handler 1 ');
-    next();
-}, 
-(req, res, next) => {
-    console.log('handling user route 2');
-    // res.send('route handler 2');
-    next();
-},
-(req, res, next) => {
-    console.log('handling user route 3');
-    // res.send('route handler 3');
-    next();
+app.get('/user', userAuth, (req, res, next) => {
+    res.send('User data sent');
+})
 
-},
-(req, res, next) => {
-    console.log('handling user route 4');
-    // res.send('route handler 4');
-    next();
+app.post('/user/login', (req, res, next) => {
+    res.send('User logged in Successfully');
+})
 
-},
-(req, res, next) => {
-    console.log('handling user route 5');
-    res.send('route handler 5');
-}
+app.get('/admin/getAllData', (req, res, next) => {
+    res.send('Get all data from admin');
+})
 
-)
+app.get('/admin/deleteUser', (req, res, next) => {
+
+    res.send('Delete a user');
+})
+
+
 
 app.listen(3000, () => {
     console.log('Server is successfully listening on port 3000');
