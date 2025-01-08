@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 // this will only match the get request
+// app.use("/route", rH, [rH2,rH3], rH4, rh5)
 
 app.use('/user', 
     
