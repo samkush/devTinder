@@ -3,27 +3,29 @@ const app = express();
 
 const { adminAuth, userAuth } = require('./middlewares/auth');
 
-// this will only match the get request
-// app.use("/route", rH, [rH2,rH3], rH4, rh5)
-// GET/users => middleware chain => request handlers 
-app.use('/admin', adminAuth);
+app.use((err, req, res, next) => {
+    console.log('Error handler middleware called');
+    if(err) {
+        res.status(500).send('Something went wrong');
+    }
+});
 
-app.get('/user', userAuth, (req, res, next) => {
+app.get('/getUserData', (req, res) => {
+    // logic of DB call and get some user data 
+try {
+
+    throw new Error('Something went wrong');
     res.send('User data sent');
-})
 
-app.post('/user/login', (req, res, next) => {
-    res.send('User logged in Successfully');
-})
+} catch (err) {
+    // next(err);
+    res.status(500).send('Some error has occurred');
+}
 
-app.get('/admin/getAllData', (req, res, next) => {
-    res.send('Get all data from admin');
-})
+});
 
-app.get('/admin/deleteUser', (req, res, next) => {
 
-    res.send('Delete a user');
-})
+
 
 
 
