@@ -32,3 +32,11 @@
 - difference between app.use/ app.all 
 - write a middleware for admin 
 - write a dummy auth middleware for all user routes except /user/login 
+- create a free cluster on mongodb official website (Mongo Atlas)
+- Install Mongoose library
+- Connect your application to the database "Connection-url"/devTinder
+- call the connectDB function to connect the database before starting application on 3000
+- create a user schema and userModel
+- create POST API call to signup api to add data to database 
+- push some documents using api call from postman
+- using error handling using try/catch

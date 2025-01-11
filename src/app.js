@@ -1,35 +1,51 @@
 const express = require('express');
+
+const connectDB = require('./config/database');
+const User = require('./models/user');
+
 const app = express();
 
-const { adminAuth, userAuth } = require('./middlewares/auth');
+app.use('/signup', async (req, res) => {
 
-app.use((err, req, res, next) => {
-    console.log('Error handler middleware called');
-    if(err) {
-        res.status(500).send('Something went wrong');
+    // const userObj = {
+    //     firstName: 'Deepak',
+    //     lastName: 'Pal',
+    //     emailId: 'deepak@pal.com',
+    //     password: 'deepak@123',
+    // }
+    // creating a new instance of the user model
+    const user = new User(
+
+       {
+        firstName: 'Sachin',
+        lastName: 'Tendulkar',
+        emailId: 'sachin@tendulkar.com',
+        password: 'sachin@123',
+       },
+       
+
+    );
+
+    try {
+        // saving the user to the database
+        const result = await user.save();
+        res.send(result);
+    } catch (error) { 
+        res.status(400).send("Error while saving the user to the database" + error.message);
     }
-});
 
-app.get('/getUserData', (req, res) => {
-    // logic of DB call and get some user data 
-try {
+  
+})
 
-    throw new Error('Something went wrong');
-    res.send('User data sent');
+connectDB()
+.then( () => {
+    console.log('MongoDB database connection established successfully...');
+    app.listen(3000, () => {
+        console.log('Server is successfully listening on port 3000');
+    });
+}).catch( (err) => {
+    console.error('Database connection failed...');
+    // process.exit(1);
+})
 
-} catch (err) {
-    // next(err);
-    res.status(500).send('Some error has occurred');
-}
-
-});
-
-
-
-
-
-
-app.listen(3000, () => {
-    console.log('Server is successfully listening on port 3000');
-});
 
