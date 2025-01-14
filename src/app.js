@@ -63,6 +63,46 @@ app.get('/feed', async (req, res) => {
 
 })
 
+// For delete user id 
+app.delete('/user/', async (req, res) => {
+    const userId = req.body.userId;
+    try {
+        const user = await User.findByIdAndDelete(userId);
+        if(!user) {
+            res.status(404).send("User not found");
+        } else {
+            res.send(user);
+        }
+    } catch(err) {
+        res.status(400).send("Error while deleting the user from the database" + err.message);
+    }
+});
+
+// update the data for the user
+
+app.patch('/user', async (req, res) => {
+    const userId = req.body.userId;
+    const data = req.body;
+    console.log(data);
+    try {
+        const user = await User.findByIdAndUpdate({_id: userId}, data, 
+        {
+            returnDocument: 'after',
+            runValidators: true,
+        }
+    
+    );
+        console.log(user);  
+        if(!user) {
+            res.status(404).send("User not found");
+        } else {
+            res.send('User updated successfully');
+        }
+    } catch(err) {
+        res.status(400).send("Error while updating the user from the database" + err.message);
+    }
+})
+
 connectDB()
 .then( () => {
     console.log('MongoDB database connection established successfully...');

@@ -46,3 +46,10 @@
 - with user.findOne which diplicate id will be return 
 - API-get user by email 
 - Feed API - GET/Feed - get all users from database
+- GET user by id 
+- difference between patch/PUT
+- what are model in findOneAndUpdate method explore more about it 
+- Create API which update the userId 
+- create a custom validate function for gendor 
+- Improve db shema - put all appropriate validation on each field in schema 
+- Add timestamps in user schema 
