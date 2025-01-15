@@ -54,3 +54,5 @@
 - Improve db shema - put all appropriate validation on each field in schema 
 - Add timestamps in user schema 
 - Data Sanitization - Add api validation for each fields 
+- Install validator
+- Explore validator  library function (npm library)and use  email , photoUrl, password for validation
