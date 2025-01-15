@@ -53,3 +53,4 @@
 - create a custom validate function for gendor 
 - Improve db shema - put all appropriate validation on each field in schema 
 - Add timestamps in user schema 
+- Data Sanitization - Add api validation for each fields 
